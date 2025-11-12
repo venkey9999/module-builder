@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module Builder - Modern UI</title>
+  <link rel="stylesheet" href="module_page.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>📘 Module Builder</h1>
+      <div class="top-controls">
+        <button id="addModuleBtn">➕ Add Lecture</button>
+        <button id="saveBtn" class="inactive">💾 Save</button>
+        <button id="editBtn">✏️ Edit</button>
+        <button id="postBtn" class="inactive">📤 Post</button>
+      </div>
+    </header>
+
+    <main id="workspace" class="workspace"></main>
+
+    <section id="output" class="output"></section>
+  </div>
+
+  <!-- Modal for adding module name -->
+  <div class="modal" id="moduleModal">
+    <div class="modal-content">
+      <h2>Enter Lecture Name</h2>
+      <input type="text" id="moduleNameInput" placeholder="e.g.python" />
+      <div class="modal-actions">
+        <button id="createModuleBtn">Create</button>
+        <button id="cancelModuleBtn" class="cancel">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="module_page.js"></script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Module Builder</title>
+
+  <!-- CSS link -->
+  <link rel="stylesheet" href="add.css">
+</head>
+<body>
+  <div class="app" id="app">
+    <h1>Module Builder</h1>
+    <div class="hint">Drag a module onto a “+” slot to open the creation modal. The new module will appear at the left side.</div>
+
+    <div class="add-row" id="addRow" aria-label="add slots">
+      <div class="add-slot" data-slot="0" tabindex="0">+</div>
+      <div class="add-slot" data-slot="1" tabindex="0">+</div>
+      <div class="add-slot" data-slot="2" tabindex="0">+</div>
+      <div class="add-slot" data-slot="3" tabindex="0">+</div>
+    </div>
+
+    <div class="module-row" id="moduleRow" aria-label="modules">
+      <div class="module-card" draggable="true">
+        <div class="module-header">
+          <div class="module-title">Module A</div>
+          <div class="badge">3</div>
+        </div>
+        <div class="lectures">
+          <div class="lecture">Lecture 1 — Intro</div>
+          <div class="lecture">Lecture 2 — Basics</div>
+          <div class="lecture">Lecture 3 — Summary</div>
+        </div>
+      </div>
+
+      <div class="module-card" draggable="true">
+        <div class="module-header">
+          <div class="module-title">Module B</div>
+          <div class="badge">2</div>
+        </div>
+        <div class="lectures">
+          <div class="lecture">Lecture 1 — Setup</div>
+          <div class="lecture">Lecture 2 — Hands-on</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal-overlay" id="modalOverlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="createTitle">
+      <h2 id="createTitle">Create New Module</h2>
+
+      <label for="moduleTitle">Module Title</label>
+      <input id="moduleTitle" type="text" placeholder="e.g. Advanced Patterns">
+
+      <label>Lectures</label>
+      <div id="lectureList" class="lecture-list">
+        <input type="text" placeholder="Lecture 1 — Title"/>
+      </div>
+
+      <div class="controls">
+        <button class="btn ghost" id="addLectureBtn">+ Add Lecture</button>
+        <div style="flex:1"></div>
+        <button class="btn" id="cancelBtn">Cancel</button>
+        <button class="btn save" id="saveBtn">Save</button>
+      </div>
+      <div class="small" style="margin-top:10px">Tip: Leave empty lecture inputs to exclude them.</div>
+    </div>
+  </div>
+
+  <!-- JS file -->
+  <script src="add.js"></script>
+</body>
+</html>

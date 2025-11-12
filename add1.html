@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Module Builder — Modern UI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="add1.css" />
+</head>
+<body>
+  <div class="paper">
+    <h1 class="title">MODULE BUILDER</h1>
+
+    <div class="top-row" id="topRow">
+      <div class="plus-box" data-index="0"><div class="plus">+</div></div>
+      <div class="plus-box" data-index="1"><div class="plus">+</div></div>
+      <div class="plus-box" data-index="2"><div class="plus">+</div></div>
+      <div class="plus-box" data-index="3"><div class="plus">+</div></div>
+      <div class="plus-box" data-index="4"><div class="plus">+</div></div>
+    </div>
+
+    <div class="bottom-area">
+      <div class="drag-row">
+        <div class="draggable-btn module-btn" draggable="true" data-type="Module">Module</div>
+        <div class="draggable-btn quiz-btn" draggable="true" data-type="Quiz">Quiz</div>
+        <div class="draggable-btn assignment-btn" draggable="true" data-type="Assignment">Assignment</div>
+        <div class="draggable-btn liveclass-btn" draggable="true" data-type="Live Class">Live Class</div>
+        <div class="draggable-btn save-btn" draggable="true" data-type="Save">Save</div>
+      </div>
+      <div class="note">💡 Drag a button onto a + box to create items</div>
+    </div>
+  </div>
+
+  <script src="add1.js"></script>
+</body>
+</html>
