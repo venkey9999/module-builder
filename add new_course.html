@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Course</title>
+    <link rel="stylesheet" href="add new_course.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="main-container">
+
+        <div class="course-box">
+            <h2>Add New Course</h2>
+
+            <label>Course Title:</label>
+            <input type="text" placeholder="Enter course title">
+
+            <label>Description:</label>
+            <textarea placeholder="Enter course description"></textarea>
+
+            <label>Price:</label>
+            <input type="text" placeholder="Enter price">
+
+            <label>Category:</label>
+            <select>
+                <option value="" disabled selected>Select Category</option>
+                <option>Business</option>
+                <option>Design</option>
+                <option>Music</option>
+                <option>Programming</option>
+                <option>Others</option>
+            </select>
+        </div>
+
+        <div class="module-box">
+            <h2>Modules</h2>
+
+            <label>Module Title:</label>
+            <input type="text" placeholder="Enter module title">
+
+            <label>Description:</label>
+            <textarea placeholder="Enter module description"></textarea>
+
+            <div>
+                <button id="btnAddLecture" class="btn-lecture">+Add Lecture</button><br>
+                 <button id="btnSaveModule" class="btn-savemodule">Save Module</button>
+            </div>
+        </div>
+
+        <div class="button-row">
+            <button id="btnAddModule" class="btn-module">+ Add Module</button><br>
+            <button id="btnSaveCourse" class="btn-save">Save Course</button>
+        </div>
+
+    </div>
+    <script>
+
+    // ✔ Go to Add Lecture Page
+    document.getElementById("btnAddLecture").addEventListener("click", function () {
+        window.location.href = "add1.html";
+    });
+
+    // ✔ Save Module Click
+    document.getElementById("btnSaveModule").addEventListener("click", function () {
+        alert("Module Saved Successfully!");
+    });
+
+    // ✔ Add New Module
+    document.getElementById("btnAddModule").addEventListener("click", function () {
+        alert("New Module Added!");
+    });
+
+    // ✔ Save Entire Course
+    document.getElementById("btnSaveCourse").addEventListener("click", function () {
+        alert("Course Saved Successfully!");
+    });
+
+</script>
+
+</body>
+</html>
