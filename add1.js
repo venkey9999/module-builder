@@ -3,9 +3,24 @@ const buttons = document.querySelectorAll(".draggable-btn");
 let draggedType = null;
 let filledBoxes = [];
 let moduleCount = 0;
+let dataSaved = false;
+let posted = false;
 
-// ===== DRAG START from bottom buttons =====
+// ========== REMOVE DRAG ON SAVE & POST ==========
 buttons.forEach(btn => {
+  const type = btn.dataset.type;
+
+  if (type === "Save") {
+    btn.addEventListener("click", saveData);
+    return;
+  }
+
+  if (type === "Post") {
+    btn.addEventListener("click", postData);
+    return;
+  }
+
+  // keep DRAG only for Module / Quiz / Assignment / Live Class
   btn.addEventListener("dragstart", e => {
     draggedType = e.target.dataset.type;
     e.target.classList.add("dragging");
@@ -22,7 +37,7 @@ function createPlusBox() {
   container.appendChild(box);
 }
 
-// ===== ENABLE DROP on each box =====
+// ===== ENABLE DROP =====
 function enableDrop(box) {
   box.addEventListener("dragover", e => {
     e.preventDefault();
@@ -34,16 +49,9 @@ function enableDrop(box) {
     box.classList.remove("drag-over");
     if (!draggedType) return;
 
-    // --- SAVE BUTTON ---
-    if (draggedType === "Save") {
-      saveData();
-      return;
-    }
-
-    // prevent overwriting
+    // prevent overwrite
     if (box.classList.contains("filled")) return;
 
-    // --- Assign automatic names ---
     let name = "";
     if (draggedType === "Module") {
       name = "Module " + String.fromCharCode(65 + moduleCount);
@@ -56,7 +64,7 @@ function enableDrop(box) {
       name = "Live Class";
     }
 
-    // --- Update box visually ---
+    // update box UI
     box.classList.add("filled");
     box.innerHTML = `<div class="box-label">${name}</div>`;
 
@@ -65,7 +73,7 @@ function enableDrop(box) {
     else if (draggedType === "Assignment") box.classList.add("assignment-filled");
     else if (draggedType === "Live Class") box.classList.add("liveclass-filled");
 
-    // --- Save data ---
+    // save data
     filledBoxes.push({
       type: draggedType,
       name: name,
@@ -81,40 +89,51 @@ function enableDrop(box) {
           : null,
     });
 
-    // Attach click listener to open later (only after saved)
+    // open page later (only after save + post)
     box.addEventListener("click", () => openPage(name));
 
-    // Always ensure there’s one empty +box
-    const hasEmpty = [...container.querySelectorAll(".plus-box")].some(b => !b.classList.contains("filled"));
+    // auto-create +box
+    const hasEmpty = [...container.querySelectorAll(".plus-box")].some(
+      b => !b.classList.contains("filled")
+    );
     if (!hasEmpty) createPlusBox();
 
     enableReorder();
+
+    // 🔥 AUTO-SAVE FEATURE
+    autoSave();
   });
 }
 
-// ===== OPEN PAGE ON CLICK (AFTER SAVE) =====
+// ===== AUTO-SAVE =====
+function autoSave() {
+  if (filledBoxes.length > 0) {
+    dataSaved = true;
+    console.log("🔄 Auto-Saved:", filledBoxes);
+  }
+}
+
+// ===== OPEN PAGE (UPDATED) =====
 function openPage(boxName) {
   const savedItem = filledBoxes.find(item => item.name === boxName);
   if (!savedItem) return;
 
-  // Check if data is saved first
-  if (!dataSaved) {
-    alert("⚠️ Please click 'Save' before opening this page.");
+  // 🔒 Must click Save AND Post first
+  if (!dataSaved || !posted) {
+    alert("⚠️ You must Save AND Post before opening.");
     return;
   }
 
-  // Redirect only after saving
+  // 🔓 Now open page
   if (savedItem.page) {
     window.location.href = savedItem.page;
   }
 }
 
-let dataSaved = false;
-
-// ===== INITIAL +BOXES =====
+// ===== INITIAL BOXES =====
 document.querySelectorAll(".plus-box").forEach(box => enableDrop(box));
 
-// ===== ENABLE REORDER (no prompts) =====
+// ===== ENABLE REORDER (unchanged) =====
 function enableReorder() {
   const boxes = container.querySelectorAll(".plus-box");
   boxes.forEach(box => {
@@ -145,13 +164,24 @@ function getAfterElement(container, x) {
   ).element;
 }
 
-// ===== MANUAL SAVE =====
+// ===== SAVE BUTTON CLICK =====
 function saveData() {
   if (filledBoxes.length === 0) {
-    alert("⚠️ No data added yet!");
+    alert("⚠️ No data added!");
     return;
   }
-  console.log("✅ Saved data:", filledBoxes);
-  alert("✅ Data saved successfully!");
   dataSaved = true;
+  console.log("✅ Saved:", filledBoxes);
+  alert("✅ Data saved!");
+}
+
+// ===== POST BUTTON CLICK =====
+function postData() {
+  if (!dataSaved) {
+    alert("⚠️ Please click Save before Post.");
+    return;
+  }
+
+  posted = true;
+  alert("📢 Posted successfully!");
 }

@@ -149,7 +149,9 @@ body {
 .save-btn:hover {
   background: #5e35b1;
 }
-
+.post-btn {
+  background: #26a69a; /* teal */
+}
 /* 💬 Note section */
 .note {
   text-align: center;
